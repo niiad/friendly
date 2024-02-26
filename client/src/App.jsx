@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react'
-import './App.css'
+import { useState, useEffect } from 'react';
+import Friends from './Friends';
+import './App.css';
 
 function App() {
   const [friends, setFriends] = useState([])
@@ -15,11 +16,7 @@ function App() {
     setFriends(data.friends)
   }
 
-  return (
-    <>
-      
-    </>
-  )
+  return <Friends friends={friends} />
 }
 
 export default App

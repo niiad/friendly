@@ -1,7 +1,7 @@
 import React from "react";
 
 
-const Friends = ({friends}) => {
+const Friends = ({friends, updateFriend, updateCallback}) => {
     return <div>
         <h2>Friends</h2>
         <table>
@@ -20,7 +20,7 @@ const Friends = ({friends}) => {
                         <td>{friend.email}</td>
                         <td>{friend.workplace}</td>
                         <td>
-                            <button>Update</button>
+                            <button onClick={() => updateFriend(friend)}>Update</button>
                             <button>Delete</button>
                         </td>
                     </tr>

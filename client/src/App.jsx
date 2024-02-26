@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Friends from './Friends';
 import './App.css';
+import FriendForm from './FriendFrom';
 
 function App() {
   const [friends, setFriends] = useState([])
@@ -16,7 +17,12 @@ function App() {
     setFriends(data.friends)
   }
 
-  return <Friends friends={friends} />
+  return (
+    <>
+      <Friends friends={friends} />
+      <FriendForm />
+    </>
+  )
 }
 
 export default App

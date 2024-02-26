@@ -40,6 +40,29 @@ def add_friend():
     )
 
 
+@app.route("/update_friend/<int:user_id>", method = ["PATCH"])
+def update_friend(user_id):
+    friend = Friend.query.get(user_id)
+
+    if not friend:
+        return (
+            jsonify({"message": "friend not found"}),
+            404
+        )
+    
+    data = request.json
+    friend.full_name = data.get("fullName", friend.full_name)
+    friend.email = data.get("email", friend.email)
+    friend.workplace = data.get("workplace", friend.workplace)
+
+    database.session.commit()
+
+    return (
+        jsonify({"message": "friend updated"}),
+        200
+    )
+
+
 if __name__ == "__main__":
     with app.app_context():
         database.create_all()

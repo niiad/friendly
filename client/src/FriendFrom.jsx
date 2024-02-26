@@ -1,10 +1,12 @@
 import { useState } from "react";
 
-// eslint-disable-next-line no-empty-pattern
-export default function FriendForm({}) {
-    const [fullName, setFullName] = useState("")
-    const [email, setEmail] = useState("")
-    const [workplace, setWorkplace] = useState("")
+
+export default function FriendForm({existingFriend = {}, updateCallback}) {
+    const [fullName, setFullName] = useState(existingFriend.fullName || "")
+    const [email, setEmail] = useState(existingFriend.email || "")
+    const [workplace, setWorkplace] = useState(existingFriend.workplace || "")
+
+    const updating = Object.entries(existingFriend).length !== 0
 
     const onSubmit = async (e) => {
         e.preventDefault()
@@ -15,7 +17,7 @@ export default function FriendForm({}) {
             workplace
         }
 
-        const url = "http://127.0.0.1:5000/add_friend"
+        const url = "http://127.0.0.1:5000/" + (updating ? `update_friend/${existingFriend.id}` : "add_friend")
 
         const options = {
             method: "POST",
@@ -31,6 +33,8 @@ export default function FriendForm({}) {
             const data = await response.json()
 
             alert(data.message)
+        } else {
+            updateCallback()
         }
     }
 

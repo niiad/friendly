@@ -20,7 +20,7 @@ export default function FriendForm({existingFriend = {}, updateCallback}) {
         const url = "http://127.0.0.1:5000/" + (updating ? `update_friend/${existingFriend.id}` : "add_friend")
 
         const options = {
-            method: "POST",
+            method: updating ? "PATCH" : "POST",
             headers: {
                 "Content-Type": "application/json"
             },
@@ -66,6 +66,6 @@ export default function FriendForm({existingFriend = {}, updateCallback}) {
                 onChange={(e) => setWorkplace(e.target.value)}
             />
         </div>
-        <button type="submit">Add Friend</button>
+        <button type="submit">{updating ? "Update" : "Add"}</button>
     </form>
 }

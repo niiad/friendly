@@ -15,7 +15,7 @@ export default function FriendForm({}) {
             workplace
         }
 
-        const url = "http://127.0.0.1:5000/create_friend"
+        const url = "http://127.0.0.1:5000/add_friend"
 
         const options = {
             method: "POST",

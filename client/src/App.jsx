@@ -5,6 +5,7 @@ import FriendForm from './FriendFrom';
 
 function App() {
   const [friends, setFriends] = useState([])
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   useEffect(() => {
     fetchFriends()
@@ -17,10 +18,26 @@ function App() {
     setFriends(data.friends)
   }
 
+  const closeModal = () => {
+    setIsModalOpen(false)
+  }  
+
+  const openCreateModal = () => {
+    if (!isModalOpen) setIsModalOpen(true)
+  }
+
   return (
     <>
       <Friends friends={friends} />
-      <FriendForm />
+      <button onClick={openCreateModal}>Add</button>
+      {isModalOpen && <div className="modal">
+        <div className="modal-content">
+          <span className="close" onClick={closeModal}>&times;</span>
+          <FriendForm />
+        </div>
+      </div>
+        
+      }
     </>
   )
 }
